@@ -52,9 +52,8 @@ private constructor(
         val now = System.currentTimeMillis()
         val userMap = mutableMapOf<UserHandle, List<UsageStats>>()
         for (user in UsersLiveData.value!!) {
-            // If the user is not enabled, or if the user is a managed profile, and this is not an
-            // android TV (where parental control accounts are managed profiles), do not get stats.
-            if (Utils.isUserDisabledOrWorkProfile(user)) {
+            // If the user is not enabled, do not get stats.
+            if (Utils.isUserDisabled(user)) {
                 continue
             }
             val statsManager =
