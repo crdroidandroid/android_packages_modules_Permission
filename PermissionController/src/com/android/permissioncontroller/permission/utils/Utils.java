@@ -1107,17 +1107,14 @@ public final class Utils {
     }
 
     /**
-     * Determines if a given user is disabled, or is a work profile.
+     * Determines if a given user is disabled.
      * @param user The user to check
-     * @return true if the user is disabled, or the user is a work profile
+     * @return true if the user is disabled
      */
-    public static boolean isUserDisabledOrWorkProfile(UserHandle user) {
+    public static boolean isUserDisabled(UserHandle user) {
         Application app = PermissionControllerApplication.get();
         UserManager userManager = app.getSystemService(UserManager.class);
-        // In android TV, parental control accounts are managed profiles
-        return !userManager.getEnabledProfiles().contains(user)
-                || (userManager.isManagedProfile(user.getIdentifier())
-                    && !DeviceUtils.isTelevision(app));
+        return !userManager.getEnabledProfiles().contains(user);
     }
 
     /**
