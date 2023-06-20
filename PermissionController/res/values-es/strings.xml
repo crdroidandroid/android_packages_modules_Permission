@@ -125,7 +125,7 @@
     <string name="permission_group_usage_title" msgid="2595013198075285173">"Uso de <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
     <string name="perm_usage_adv_info_title" msgid="3357831829538873708">"Ver otros permisos"</string>
     <string name="perm_usage_adv_info_summary_2_items" msgid="3702175198750127822">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>"</string>
-    <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g>, <xliff:g id="NUM">%3$s</xliff:g> más"</string>
+    <string name="perm_usage_adv_info_summary_more_items" msgid="949055326299562218">"<xliff:g id="PERMGROUP_0">%1$s</xliff:g>, <xliff:g id="PERMGROUP_1">%2$s</xliff:g> y <xliff:g id="NUM">%3$s</xliff:g> más"</string>
     <string name="permission_group_usage_subtitle_24h" msgid="5120155996322114181">"Cronología de cuándo han usado las aplicaciones el permiso <xliff:g id="PERMGROUP">%1$s</xliff:g> en las últimas 24 horas"</string>
     <string name="permission_group_usage_subtitle_7d" msgid="1465828402260324654">"Cronología de cuándo han usado las aplicaciones el permiso <xliff:g id="PERMGROUP">%1$s</xliff:g> en los últimos 7 días"</string>
     <string name="permission_usage_access_dialog_subtitle" msgid="4171772805196955753">"Cuándo ha utilizado esta aplicación tu permiso de <xliff:g id="PERMGROUP">%1$s</xliff:g>"</string>
@@ -409,7 +409,7 @@
     <string name="car_default_app_selected" msgid="5416420830430644174">"Seleccionada"</string>
     <string name="car_default_app_selected_with_info" msgid="1932204186080593500">"Seleccionada: <xliff:g id="ADDITIONAL_INFO">%1$s</xliff:g>"</string>
     <string name="special_app_access_search_keyword" msgid="8032347212290774210">"aplicaciones con accesos especiales"</string>
-    <string name="special_app_access" msgid="5019319067120213797">"Aplicaciones con accesos especiales"</string>
+    <string name="special_app_access" msgid="5019319067120213797">"aplicaciones con accesos especiales"</string>
     <string name="no_special_app_access" msgid="6950277571805106247">"Sin acceso especial de apps"</string>
     <string name="special_app_access_no_apps" msgid="4102911722787886970">"No hay aplicaciones"</string>
     <string name="home_missing_work_profile_support" msgid="1756855847669387977">"No admite perfiles de trabajo"</string>
