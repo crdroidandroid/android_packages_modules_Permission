@@ -74,17 +74,6 @@ object RuntimePermissionsUpgradeController {
 
         GlobalScope.launch(IPC) {
             val upgradedVersion = onUpgradeLocked(context, currentVersion)
-            if (upgradedVersion != LATEST_VERSION) {
-                Log.wtf(
-                    "PermissionControllerService",
-                    "warning: upgrading permission database" +
-                        " to version $LATEST_VERSION left it at $currentVersion instead; this is " +
-                        "probably a bug. Did you update LATEST_VERSION?",
-                    Throwable()
-                )
-                throw RuntimeException("db upgrade error")
-            }
-
             if (storedVersion != upgradedVersion) {
                 permissionManager.runtimePermissionsVersion = LATEST_VERSION
             }
