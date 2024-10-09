@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Binder;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 
 import java.util.List;
@@ -81,5 +83,18 @@ public final class PackageUtils {
         } finally {
             Binder.restoreCallingIdentity(callingId);
         }
+    }
+
+    /** Default is to not use fs-verity since it depends on kernel support. */
+    private static final int FSVERITY_DISABLED = 0;
+
+    /** Standard fs-verity. */
+    private static final int FSVERITY_ENABLED = 2;
+
+    /** Returns true if standard APK Verity is enabled. */
+    public static boolean isApkVerityEnabled() {
+        return Build.VERSION.DEVICE_INITIAL_SDK_INT >= Build.VERSION_CODES.R
+                || SystemProperties.getInt("ro.apk_verity.mode", FSVERITY_DISABLED)
+                        == FSVERITY_ENABLED;
     }
 }
