@@ -530,10 +530,8 @@ class AppPermissionViewModel(
             // 2. Else if FINE or COARSE have the isSelectedLocationAccuracy flag set, then return
             //    true if FINE isSelectedLocationAccuracy is set.
             // 3. Else, return default precision from device config.
-            return if (
-                fineLocation.isGrantedIncludingAppOp || coarseLocation.isGrantedIncludingAppOp
-            ) {
-                fineLocation.isGrantedIncludingAppOp
+            return if (fineLocation.isGranted || coarseLocation.isGranted) {
+                fineLocation.isGranted
             } else if (
                 fineLocation.isSelectedLocationAccuracy || coarseLocation.isSelectedLocationAccuracy
             ) {
@@ -1144,9 +1142,7 @@ class AppPermissionViewModel(
     }
 
     private fun getIndividualPermissionDetailResId(group: LightAppPermGroup): Pair<Int, Int> {
-        return when (
-            val numRevoked = group.permissions.filter { !it.value.isGrantedIncludingAppOp }.size
-        ) {
+        return when (val numRevoked = group.permissions.filter { !it.value.isGranted }.size) {
             0 -> R.string.permission_revoked_none to numRevoked
             group.permissions.size -> R.string.permission_revoked_all to numRevoked
             else -> R.string.permission_revoked_count to numRevoked
@@ -1217,7 +1213,7 @@ class AppPermissionViewModel(
             val newPermission = newGroup.permissions[permName] ?: continue
 
             if (
-                permission.isGrantedIncludingAppOp != newPermission.isGrantedIncludingAppOp ||
+                permission.isGranted != newPermission.isGranted ||
                     permission.flags != newPermission.flags
             ) {
                 logAppPermissionFragmentActionReported(changeId, newPermission, buttonPressed)
@@ -1225,7 +1221,7 @@ class AppPermissionViewModel(
                     app.applicationContext,
                     packageName,
                     permGroupName,
-                    newPermission.isGrantedIncludingAppOp
+                    newPermission.isGranted
                 )
                 PermissionChangeStorageImpl.recordPermissionChange(packageName)
             }
@@ -1255,7 +1251,7 @@ class AppPermissionViewModel(
             uid,
             packageName,
             permission.permInfo.name,
-            permission.isGrantedIncludingAppOp,
+            permission.isGranted,
             permission.flags,
             buttonPressed
         )
@@ -1265,7 +1261,7 @@ class AppPermissionViewModel(
                 "$changeId uid=$uid packageName=$packageName permission=" +
                 permission.permInfo.name +
                 " isGranted=" +
-                permission.isGrantedIncludingAppOp +
+                permission.isGranted +
                 " permissionFlags=" +
                 permission.flags +
                 " buttonPressed=$buttonPressed"
@@ -1307,7 +1303,7 @@ class AppPermissionViewModel(
 
         return group.isGranted &&
             group.permissions.values.all {
-                it.name in partialPerms || (it.name !in partialPerms && !it.isGrantedIncludingAppOp)
+                it.name in partialPerms || (it.name !in partialPerms && !it.isGranted)
             }
     }
 }
