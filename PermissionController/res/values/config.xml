@@ -53,7 +53,7 @@
     <bool name="config_useWindowBlur">false</bool>
     <bool name="config_useMaterial3PermissionGrantDialog">false</bool>
     <!-- Name of a font family to use for headlines in SettingsLib. -->
-    <string name="config_headlineFontFamily" translatable="false"></string>
+    <string name="config_headlineFontFamily" translatable="false">@*android:string/config_headlineFontFamily</string>
 
     <!-- Whether to show the "Show password" toggle -->
     <bool name="config_display_show_password_toggle">true</bool>
