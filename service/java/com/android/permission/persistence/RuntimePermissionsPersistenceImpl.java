@@ -29,7 +29,6 @@ import android.util.Xml;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.modules.utils.build.SdkLevel;
-import com.android.permission.util.PackageUtils;
 import com.android.server.security.FileIntegrity;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -83,7 +82,7 @@ public class RuntimePermissionsPersistenceImpl implements RuntimePermissionsPers
 
     RuntimePermissionsPersistenceImpl() {
         this(file -> {
-            if (SdkLevel.isAtLeastU() && PackageUtils.isApkVerityEnabled()) {
+            if (SdkLevel.isAtLeastU()) {
                 FileIntegrity.setUpFsVerity(file);
             }
         });
@@ -248,13 +247,11 @@ public class RuntimePermissionsPersistenceImpl implements RuntimePermissionsPers
             Log.e(LOG_TAG, "Failed to write reserve copy: " + reserveFile, e);
         }
 
-        if (PackageUtils.isApkVerityEnabled()) {
-            try {
-                mInjector.enableFsVerity(file);
-                mInjector.enableFsVerity(reserveFile);
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "Failed to verity-protect runtime-permissions", e);
-            }
+        try {
+            mInjector.enableFsVerity(file);
+            mInjector.enableFsVerity(reserveFile);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Failed to verity-protect runtime-permissions", e);
         }
     }
 

@@ -30,7 +30,6 @@ import android.util.Xml;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.modules.utils.build.SdkLevel;
 import com.android.permission.persistence.IoUtils;
-import com.android.permission.util.PackageUtils;
 import com.android.server.security.FileIntegrity;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -81,7 +80,7 @@ public class RolesPersistenceImpl implements RolesPersistence {
 
     RolesPersistenceImpl() {
         this(file -> {
-            if (SdkLevel.isAtLeastU() && PackageUtils.isApkVerityEnabled()) {
+            if (SdkLevel.isAtLeastU()) {
                 FileIntegrity.setUpFsVerity(file);
             }
         });
@@ -238,13 +237,11 @@ public class RolesPersistenceImpl implements RolesPersistence {
             Log.e(LOG_TAG, "Failed to write reserve copy: " + reserveFile, e);
         }
 
-        if (PackageUtils.isApkVerityEnabled()) {
-            try {
-                mInjector.enableFsVerity(file);
-                mInjector.enableFsVerity(reserveFile);
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "Failed to verity-protect roles", e);
-            }
+        try {
+            mInjector.enableFsVerity(file);
+            mInjector.enableFsVerity(reserveFile);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Failed to verity-protect roles", e);
         }
     }
 
